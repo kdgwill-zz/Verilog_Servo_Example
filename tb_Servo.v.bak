@@ -1,0 +1,75 @@
+`include "Servo_Rom.v"
+`include "Servo.v"
+`timescale 1 ns / 100ps //time unit = 1ns; precision = 1/10 ns
+module tb_Servo #(
+parameter CLK_FREQUENCY = 50000000,//we want a 50Mhz clock so 10ns this makes   
+parameter SPEED_MAX_PERIOD = 0.03 ,//LETS ASSUME MAX_PERIOD is 30ms
+//Lets take 256 position per rom this will result in 8 bits
+parameter MAX_RAM_POS = 256,
+//Lets take 256 position per quantity this will result in 8 bits
+parameter VALUE_SCALING = 256
+);
+  //CLOCK EXPLANATION
+  parameter CLK_PERIOD = 1.0 * 1/CLK_FREQUENCY; //we can find the period by inverting the frequency
+  parameter CLK_PERIOD_NS = CLK_PERIOD * 1000000000;//This is represented in nanoseconds
+  parameter CLK_NS = CLK_PERIOD_NS/2;//This is represented in nanoseconds this should be 10 if freq is 50Mghz
+  //SPEED EXPLANATION
+  //lets asume max speed is 30ms running on a 50Mhz clock
+  parameter SPEED_MAX_VALUE =  CLK_FREQUENCY * (1/SPEED_MAX_PERIOD) * 1.0; // this is really 50e6 * 1/30e-3
+  //Now we need to know the max amount of bits to hold this value
+  parameter SPEED_LEN = log2(SPEED_MAX_VALUE);//basically we can adjust the speed by mult CLKFREQ by SPEED
+  //ROM INFORMATION
+  parameter ADDR_LEN = log2(MAX_RAM_POS);
+  parameter SPEED_DATA_LEN = log2(SPEED_MAX_PERIOD * 1000);//this will give us a value of 30 and log2 will give 5
+  parameter POSITION_DATA_LEN = log2(VALUE_SCALING);
+  parameter DATA_LEN = SPEED_DATA_LEN+POSITION_DATA_LEN;
+  reg clk;
+  reg rst;  
+  wire	[ADDR_LEN-1:0]  addr;
+	wire	[DATA_LEN-1:0]  rom_q;
+	wire servo_q;
+  
+  initial begin
+    clk = 0;
+    rst = 1;
+    #CLK_PERIOD_NS rst = 0;
+  end
+  
+  always begin
+    //50 MHz clock with 50% duty-cycle
+    //use 10
+    #CLK_NS clk = ~clk;    
+  end
+  
+  Servo_Rom #(.ADDR_LEN(ADDR_LEN),
+              .DATA_LEN(DATA_LEN))
+     servoRom(.clock(clk),
+              .address(addr),
+              .data(rom_q));  
+                        
+  Servo #(.CLK_FREQUENCY(CLK_FREQUENCY), 
+                    .VALUE_SCALING(VALUE_SCALING),
+                    .CTR_LEN(SPEED_LEN),
+                    .SPEED_DATA_LEN(SPEED_DATA_LEN),
+                    .POSITION_DATA_LEN(POSITION_DATA_LEN),
+                    .ADDR_LEN(ADDR_LEN),
+                    .MAX_RAM_POS(MAX_RAM_POS),
+                    .DATA_LEN(DATA_LEN)
+                    )
+                servo(.clk(clk),
+                      .rst(rst),
+                      .data(rom_q),
+                      .address(addr),
+                      .servo_q(servo_q));
+ 
+
+//Taken from http://www.beyond-circuits.com/wordpress/2008/11/constant-functions/
+function integer log2;
+  input integer value;
+  begin
+    value = value-1;
+    for (log2=0; value>0; log2=log2+1)
+      value = value>>1;
+  end
+endfunction           
+endmodule

@@ -1,0 +1,20 @@
+module Servo_Rom #(
+  parameter ADDR_LEN = 8,
+  parameter DATA_LEN = 13
+)(
+  input clock               ,  //Clock input
+  input [ADDR_LEN-1:0] address       ,  // Address input
+  output reg [DATA_LEN-1:0] data     // Data output
+);
+      
+reg [13-1:0] mem [0:255] ;  
+
+always@(posedge clock)begin
+  data <= (address<=255||address>=0)? mem[address] : 8'b0;
+end
+
+initial begin
+  $readmemb("Servo_Test_Values_50DUT.hex", mem); // memory_list is memory file
+end
+
+endmodule

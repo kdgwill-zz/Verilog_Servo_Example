@@ -1,0 +1,42 @@
+http://www.epanorama.net/documents/motor/rcservos.html
+http://www-cdr.stanford.edu/dynamic/servo/
+
+
+R/C Servos are controlled by sending them a "pulse" of variable width. 
+The parameters for this pulse are that it has a minimum width, a maximum width, and a repetition rate. 
+These values are not "standard" but there are conventions that are generally accepted. 
+The convention is that a pulse of approximately 1500 uS (1.5 mS) is the "neutral" point for the servo. 
+Given the rotation constraints of the servo, neutral is defined to be the position where the servo has 
+exactly the same amount of potential rotation in the counter clockwise direction as it does in the clockwise direction. 
+It is important to note that different R/C servos will have different constraints on their rotation but they _all_ have 
+a neutral position, and that position is always around 1500 uS.
+
+Standard width of the pulse should be between 1000 and 2000µs, with 1500µs representing the center position. 
+This equivalates to 1ms 2ms and 1.5ms
+
+These servos are "active" devices, meaning that when commanded to move they will actively hold their position. 
+Thus, if a servo is commanded to the neutral position and an external force is present to push against the servo 
+(presumably through the mechanical linkage) the servo will actively resist being moved out of that position. 
+The maximum amount of force the servo can exert is the torque rating of the servo. The Futaba servo is rated around 
+40 oz/inches or 2.5 pounds of push at 1 inch away from from the shaft of the servo motor. 
+Servos will not hold their position forever though, the position pulse must be repeated to instruct the servo to stay in position.
+The maximum amount of time that can pass before the servo will stop holding its position is the command repetition rate. 
+Typical values for the command repetition rate are 20 - 30 mS. You can repeat the pulse more often than this, but not less often.
+When this timeout expires and there hasn't been another pulse the servo de-energizes the motor. 
+In this state in can be pushed out of position and it will not return to the commanded position.
+
+When the pulse sent to a servo is less than 1500 uS. 
+the servo positions and holds its output shaft some number of degrees counterclockwise from the neutral point. 
+When the pulse is wider than 1500 uS the opposite occurs. 
+The minimal width and the maximum width of pulse that will command the servo to turn to a valid position are 
+functions of each servo. Different brands, and even different servos of the same brand, will have different 
+maximum and minimums. Generally the minimum pulse will be about 1000 uS wide and the maximum pulse will be 2000uS wide. 
+However, these are just guidelines and should be checked on the servos you use. In particular if you attempt to command 
+a servo past its maximum or minimum rotation it will use the maximum amount of current trying unsuccessfully to achieve 
+that position.
+
+Another parameter that varies from servo to servo is the slew rate. 
+This is the time it takes for the servo to change from one position to another. 
+The worst case slewing time is when the servo is holding at the minimum rotation and 
+it is commanded to go to maximum rotation. This can take several seconds on very high torque servos. 
+Typically it takes less than two seconds.

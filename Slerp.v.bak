@@ -1,0 +1,50 @@
+module Servo #(
+parameter ADDR_LEN = 8,
+parameter ADDR_MAX = 2**8,
+parameter SPEED_DATA_LEN = 5,//assume max speed 30
+parameter POSITION_DATA_LEN = 8,//based off of 256 scaling
+parameter DATA_LEN = SPEED_DATA_LEN + POSITION_DATA_LEN-1
+)(
+input clk,
+input rst,
+input [DATA_LEN-1:0] data,
+output reg [ADDR_LEN-1:0] address,
+output reg [DATA_LEN-1:0] position
+);
+
+reg [SPEED_DATA_LEN-1:0]    changeSpeed;
+reg [POSITION_DATA_LEN-1:0] goalPosition;
+reg [POSITION_DATA_LEN-1:0] currentPosition;
+reg bool;
+
+assign goalPosition <= data[0+:POSITION_DATA_LEN-1];
+assign changeSpeed <= data[POSITION_DATA_LEN+:SPEED_DATA_LEN-1];
+assign bool <= currentPosition < goalPosition? 1'b1 : 1'b0;
+
+always@(posedge clk)begin
+  if(rst)begin
+    address <= '0;
+  end else if(currentPosition == goalPosition) begin
+    address <= address!=ADDR_MAX?address+1'b1:address;
+  end
+end
+
+always@(posedge clk)begin
+  if(rst)begin
+    currentPosition <= '0;//WRONG,THIS SHOULD BE SET TO NEUTRAL POSITION
+  end else if(bool)begin
+    if(currentPosition > goalPosition)begin
+      currentPosition <= goalPosition;
+    end else begin 
+      currentPosition <= currentPosition + changeSpeed;
+    end 
+  end else begin
+    if(currentPosition < goalPosition)begin
+      currentPosition <= goalPosition;
+    end else begin 
+      currentPosition <= currentPosition - changeSpeed;
+    end 
+  end  
+end
+
+endmodule

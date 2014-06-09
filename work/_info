@@ -1,0 +1,180 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\altera\11.1\modelsim_ase
+vClockGenerator
+Z1 !s100 [z3oV@ic[fcF`=Xzn[6im2
+Z2 IBRQDm^z9EZE:=@f7m4jBW1
+Z3 VYmImXa=W1kD5PzcIVakR@2
+Z4 dC:\Users\Kyle\Desktop\Stevian_Servo
+Z5 w1400170496
+Z6 FClockGenerator.v
+Z7 8MojoTop.v
+Z8 FMojoTop.v
+L0 2
+Z9 OV;L;10.0c;49
+r1
+!s85 0
+31
+Z10 !s108 1400170530.986000
+Z11 !s107 testServo.v|ClockGenerator.v|counter.v|MojoTop.v|
+Z12 !s90 -reportprogress|300|MojoTop.v|
+!s101 -O0
+o-O0
+Z13 n@clock@generator
+vcounter
+Z14 !s100 DW1WUH_4<J8j0A@h=?QSL2
+Z15 I`DZ_D6=S6?CP@ioCda@X90
+Z16 V0ACZ;nB1k0I1:k:TRUzA30
+R4
+w1400170528
+Z17 Fcounter.v
+R7
+R8
+L0 1
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!s101 -O0
+o-O0
+vMojoTop
+!s100 1K<:GM7OJJ>A4b<f^J@=S0
+I4zc^Toc82XgET]9QRceML3
+Z18 V<dOPl5OEYomi<djYlFddM1
+R4
+R5
+R7
+R8
+L0 4
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!s101 -O0
+o-O0
+Z19 n@mojo@top
+vrom_using_file
+Z20 !s100 9aWPL6gG:hH7g5@4P?=BX1
+Z21 Ia^0jYhXRl^==@l3V^T_C82
+Z22 VoIZjYEWTnDjc`z@:NXD@b1
+R4
+Z23 w1400093482
+Z24 8Servo_Rom.v
+Z25 FServo_Rom.v
+L0 7
+R9
+r1
+31
+Z26 !s90 -reportprogress|300|Servo_Rom.v|
+o-O0
+Z27 !s108 1400093594.084000
+Z28 !s107 Servo_Rom.v|
+!s85 0
+!s101 -O0
+vServo
+Z29 I7oFF>XO35L7Iz;ZL@Ga=j2
+Z30 VZZ:]_@U^S6_S_n8hZk?1S0
+R4
+Z31 w1400169971
+Z32 FServo.v
+Z33 8tb_Servo.v
+Z34 Ftb_Servo.v
+L0 22
+R9
+r1
+31
+Z35 !s108 1400169976.619000
+Z36 !s107 Servo.v|Servo_Rom.v|tb_Servo.v|
+Z37 !s90 -reportprogress|300|tb_Servo.v|
+o-O0
+Z38 n@servo
+Z39 !s100 z9n[lLdC<bZN5NlDXN8o13
+!s85 0
+!s101 -O0
+vServo_Rom
+Z40 !s100 KnlE9]DMaBN1gd^CS1BIk1
+Z41 Igh^n3PA1X48Z<em2NG:OT0
+Z42 VURQZV@iW8H266f09IF1G42
+R4
+Z43 w1400138238
+R25
+R33
+R34
+L0 1
+R9
+r1
+31
+R35
+R36
+R37
+o-O0
+Z44 n@servo_@rom
+!s85 0
+!s101 -O0
+vServoLinPosCntr
+Z45 !s100 Xd1A9V0njTLCZ3N7kQUcf3
+Z46 IF8OeMORS@c>^@4hNQKRaF3
+Z47 V^K?]EeY`^?`iKKNfmo_kO1
+R4
+Z48 w1400125757
+Z49 FServoLinPosCntr.v
+R33
+R34
+L0 2
+R9
+r1
+31
+Z50 !s108 1400125760.049000
+Z51 !s107 Servo.v|ServoLinPosCntr.v|Servo_Rom.v|tb_Servo.v|
+R37
+o-O0
+Z52 n@servo@lin@pos@cntr
+!s85 0
+!s101 -O0
+vtb_Servo
+Z53 !s100 h_b^Y?n_LXe71WfL@]k4g0
+Z54 IQz1>3J1`3T=ENTiNEWlVF0
+Z55 VQ5i^[BdYKdJe[><b8nkG03
+R4
+R43
+R33
+R34
+L0 5
+R9
+r1
+31
+R35
+R36
+R37
+o-O0
+Z56 ntb_@servo
+!s85 0
+!s101 -O0
+vtestServo
+Z57 !s100 ERSmVG?YLld1n1>@HF2kz3
+Z58 IgUQ>gG1PCMda0@2_f[hXT2
+Z59 V5:OONgzZ0ajHAa;32C:h71
+R4
+R5
+Z60 FtestServo.v
+R7
+R8
+L0 1
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!s101 -O0
+o-O0
+Z61 ntest@servo

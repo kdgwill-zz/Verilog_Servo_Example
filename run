@@ -1,0 +1,12 @@
+quit -sim;
+vlog tb_Servo.v;
+vsim tb_Servo;
+
+add wave -divider Top;
+add wave sim:/tb_Servo/*;
+
+add wave -divider Servo_Controller;
+add wave sim:/tb_Servo/servo/*;
+
+run 60ms;
+wave zoom full;

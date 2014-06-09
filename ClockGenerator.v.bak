@@ -1,0 +1,21 @@
+`timescale 1 ns / 100ps //time unit = 1ns; precision = 1/10 ns
+module ClockGenerator(
+  output reg clock,
+  output reg reset
+);
+   
+  always begin
+    //50 MHz clock with 50% duty-cycle
+    //use 10
+    #0.01 clock = ~clock;
+    
+  end
+  
+ initial 
+  begin
+    clock = 0;
+    reset = 1;
+    #20 reset = 0;
+  end
+    
+endmodule
